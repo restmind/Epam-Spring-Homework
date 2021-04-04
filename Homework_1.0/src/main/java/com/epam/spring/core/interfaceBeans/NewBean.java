@@ -28,7 +28,7 @@ public class NewBean {
     }
 
     @Autowired
-    @Qualifier("Audi")
+    @Qualifier("audi")
     public void setAudi(Car audi) {
         this.audi = audi;
     }
@@ -38,7 +38,7 @@ public class NewBean {
     }
 
     @Autowired
-    @Qualifier("Porsche")
+    @Qualifier("porsche")
     public void setPorsche(Car porsche) {
         this.porsche = porsche;
     }
@@ -57,7 +57,7 @@ public class NewBean {
     }
 
     @Autowired
-    @Qualifier("Volkswagen")
+    @Qualifier("volkswagen")
     public void setVolkswagen(Car volkswagen) {
         this.volkswagen = volkswagen;
     }

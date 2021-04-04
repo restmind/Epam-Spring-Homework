@@ -3,7 +3,7 @@ package com.epam.spring.core.interfaceBeans;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Component("Volkswagen")
+@Component("volkswagen")
 @Order(4)
 public class Volkswagen implements Car {
     @Override
