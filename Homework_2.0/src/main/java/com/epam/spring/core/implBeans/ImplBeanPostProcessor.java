@@ -1,5 +1,6 @@
-package com.epam.spring.core.beans;
+package com.epam.spring.core.implBeans;
 
+import com.epam.spring.core.beans.GeneralBean;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
