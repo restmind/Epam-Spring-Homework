@@ -7,8 +7,10 @@ import com.epam.spring.web.mvc.rentcarservice.persistence.dao.UserRepository;
 import com.epam.spring.web.mvc.rentcarservice.service.CarService;
 import com.epam.spring.web.mvc.rentcarservice.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -18,6 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUser(String email) {
+        log.info("UserService: get user by email {}", email);
         return mapUserToUserDto(userRepository.getUser(email));
     }
 
@@ -25,6 +28,7 @@ public class UserServiceImpl implements UserService {
     public UserDto createUser(UserDto userDto) {
         User user = mapUserDtoToUser(userDto);
         user = userRepository.createUser(user);
+        log.info("UserService: create user {}", userDto);
         return mapUserToUserDto(user);
     }
 
@@ -32,12 +36,14 @@ public class UserServiceImpl implements UserService {
     public UserDto updateUser(String email, UserDto userDto) {
         User user = mapUserDtoToUser(userDto);
         user = userRepository.updateUser(email, user);
+        log.info("UserService: update user with email {}", email);
         return mapUserToUserDto(user);
     }
 
     @Override
     public void deleteUser(String email) {
         userRepository.deleteUser(email);
+        log.info("UserService: delete user with email {}", email);
     }
 
     @Override
@@ -47,6 +53,7 @@ public class UserServiceImpl implements UserService {
         user.setCar(carService.getCar(carNumber).isAvailable()?
                 carDto : null);
         carDto.setAvailable(false);
+        log.info("UserService: set car for user with email {}", email);
         return mapUserToUserDto(user);
     }
 
@@ -56,7 +63,7 @@ public class UserServiceImpl implements UserService {
                 .lastName(userDto.getLastName())
                 .email(userDto.getEmail())
                 .password(userDto.getPassword())
-                .password(userDto.getPassword())
+                .phone(userDto.getPhone())
                 .car(userDto.getCar())
                 .build();
     }

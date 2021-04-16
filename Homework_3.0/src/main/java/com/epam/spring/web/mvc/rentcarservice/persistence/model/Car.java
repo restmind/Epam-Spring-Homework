@@ -9,7 +9,7 @@ public class Car {
     private String brand;
     private String model;
     private String carClass;
-    private int price;
+    private String price;
     private String carNumber;
     private boolean isAvailable = true;
 }

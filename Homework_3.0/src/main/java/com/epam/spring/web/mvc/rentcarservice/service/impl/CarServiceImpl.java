@@ -5,12 +5,14 @@ import com.epam.spring.web.mvc.rentcarservice.persistence.model.Car;
 import com.epam.spring.web.mvc.rentcarservice.persistence.dao.CarRepository;
 import com.epam.spring.web.mvc.rentcarservice.service.CarService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CarServiceImpl implements CarService {
@@ -19,11 +21,13 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<CarDto> getCars() {
+        log.info("CarService: get list of cars");
         return carRepository.getCars().stream().map(this::mapCarToCarDto).collect(Collectors.toList());
     }
 
     @Override
     public CarDto getCar(String carNumber) {
+        log.info("CarService: get car by carNumber {}", carNumber);
         return mapCarToCarDto(carRepository.getCar(carNumber));
     }
 
@@ -31,6 +35,7 @@ public class CarServiceImpl implements CarService {
     public CarDto createCar(CarDto carDto) {
         Car car = mapCarDtoToCar(carDto);
         car = carRepository.createCar(car);
+        log.info("CarService: create car {}", carDto);
         return mapCarToCarDto(car);
     }
 
@@ -38,36 +43,42 @@ public class CarServiceImpl implements CarService {
     public CarDto updateCar(String carNumber, CarDto carDto) {
         Car car = mapCarDtoToCar(carDto);
         car = carRepository.updateCar(carNumber, car);
+        log.info("CarService: update car with carNumber {}", carNumber);
         return mapCarToCarDto(car);
     }
 
     @Override
     public void deleteCar(String carNumber) {
         carRepository.deleteCar(carNumber);
+        log.info("CarService: delete car with carNumber {}", carNumber);
     }
 
     @Override
     public List<CarDto> findByBrand(String brand) {
+        log.info("CarService: find cars by brand {}", brand);
         return carRepository.findByBrand(brand).stream().map(this::mapCarToCarDto).collect(Collectors.toList());
     }
 
     @Override
     public List<CarDto> findByCarClass(String carClass) {
+        log.info("CarService: find cars by carClass {}", carClass);
         return carRepository.findByCarClass(carClass).stream().map(this::mapCarToCarDto).collect(Collectors.toList());
     }
 
     @Override
     public List<CarDto> sortByRentPrice(String order) {
+        log.info("CarService: sort cars by price with order {}", order);
         return carRepository
                 .getCars()
                 .stream()
-                .sorted(order.equals("DESC")? Comparator.comparingInt(Car::getPrice).reversed()
-                        : Comparator.comparingInt(Car::getPrice))
+                .sorted(order.equals("DESC")? Comparator.comparing(Car::getPrice).reversed()
+                        : Comparator.comparing(Car::getPrice))
                 .map(this::mapCarToCarDto).collect(Collectors.toList());
     }
 
     @Override
     public List<CarDto> sortByName(String order) {
+        log.info("CarService: sort cars by name with order {}", order);
         return carRepository
                 .getCars()
                 .stream()
