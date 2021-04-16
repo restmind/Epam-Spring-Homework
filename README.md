@@ -2,12 +2,12 @@
 
 #### Required:
 1.	Migrate core business logic related functionality from Servlet-based application to Spring MVC adapting the old project to the correct package structure, naming conventions, etc.:
-    - get rid of all JSP views (now your service will be consuming and populating only JSON text format)
+    -   get rid of all JSP views (now your service will be consuming and populating only JSON text format)
     -	make your service RESTful (don't implement HATEOAS logic for now. It will be accomplished in the scope of future lectures)
-    - the best approach is to start from the scratch and create an empty Spring Boot project using the 'Spring Initializr'.
+    -   the best approach is to start from the scratch and create an empty Spring Boot project using the 'Spring Initializr'.
     -	avoid code copypaste from the old project, unless it relates to the business logic.
-    - the Spring Boot Actuator must be present in the new project.
-    - you could use ‘Postman’ or any other tool to make HTTP calls to your server.
+    -   the Spring Boot Actuator must be present in the new project.
+    -   you could use ‘Postman’ or any other tool to make HTTP calls to your server.
     
 2.	Add a logging interceptor to the new 'interceptor' package that will handle all requests and write a log with the user's session id.
 
@@ -34,9 +34,9 @@ Optional (would be a great plus):
 ## Car Rental
 
 The system has a list of cars for which it is necessary to implement:
-    - choice by brand;
-    - selection by quality class;
-    - sorting by rental price;
-    - sort by name.
+    -   choice by brand
+    -   selection by quality class
+    -   sorting by rental price
+    -   sort by name
 
 And have all the CRUD operations for the car. Add users who will own those cars
