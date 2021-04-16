@@ -10,4 +10,6 @@ public interface UserService {
     UserDto updateUser(String email, UserDto userDto);
 
     void deleteUser(String email);
+
+    UserDto userSetCar(String carNumber, String email);
 }

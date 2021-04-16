@@ -1,7 +1,7 @@
-package com.epam.spring.web.mvc.rentcarservice.repository.impl;
+package com.epam.spring.web.mvc.rentcarservice.persistence.dao.impl;
 
-import com.epam.spring.web.mvc.rentcarservice.model.User;
-import com.epam.spring.web.mvc.rentcarservice.repository.UserRepository;
+import com.epam.spring.web.mvc.rentcarservice.persistence.model.User;
+import com.epam.spring.web.mvc.rentcarservice.persistence.dao.UserRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

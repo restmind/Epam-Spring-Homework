@@ -35,4 +35,11 @@ public class UserController {
     public void deleteUser(@PathVariable String email) {
         userService.deleteUser(email);
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PatchMapping(value = "{email}/rent-car")
+    public UserDto UserSetCar(@PathVariable String email, @RequestParam String carNumber) {
+        return userService.userSetCar(carNumber, email);
+
+    }
 }

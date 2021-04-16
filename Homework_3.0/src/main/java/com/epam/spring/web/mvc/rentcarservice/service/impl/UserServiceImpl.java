@@ -1,8 +1,10 @@
 package com.epam.spring.web.mvc.rentcarservice.service.impl;
 
+import com.epam.spring.web.mvc.rentcarservice.dto.CarDto;
 import com.epam.spring.web.mvc.rentcarservice.dto.UserDto;
-import com.epam.spring.web.mvc.rentcarservice.model.User;
-import com.epam.spring.web.mvc.rentcarservice.repository.UserRepository;
+import com.epam.spring.web.mvc.rentcarservice.persistence.model.User;
+import com.epam.spring.web.mvc.rentcarservice.persistence.dao.UserRepository;
+import com.epam.spring.web.mvc.rentcarservice.service.CarService;
 import com.epam.spring.web.mvc.rentcarservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final CarService carService;
 
     @Override
     public UserDto getUser(String email) {
@@ -37,12 +40,24 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteUser(email);
     }
 
+    @Override
+    public UserDto userSetCar(String carNumber, String email) {
+        CarDto carDto = carService.getCar(carNumber);
+        User user = userRepository.getUser(email);
+        user.setCar(carService.getCar(carNumber).isAvailable()?
+                carDto : null);
+        carDto.setAvailable(false);
+        return mapUserToUserDto(user);
+    }
+
     private User mapUserDtoToUser(UserDto userDto) {
         return User.builder()
                 .firstName(userDto.getFirstName())
                 .lastName(userDto.getLastName())
                 .email(userDto.getEmail())
                 .password(userDto.getPassword())
+                .password(userDto.getPassword())
+                .car(userDto.getCar())
                 .build();
     }
 
@@ -51,6 +66,8 @@ public class UserServiceImpl implements UserService {
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .email(user.getEmail())
+                .phone(user.getPhone())
+                .car(user.getCar())
                 .build();
     }
 }
