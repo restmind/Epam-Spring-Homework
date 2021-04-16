@@ -1,6 +1,6 @@
 # Spring_4 Web MVC Homework
 
-####Required:
+#### Required:
 1.	Migrate core business logic related functionality from Servlet-based application to Spring MVC adapting the old project to the correct package structure, naming conventions, etc.:
     - get rid of all JSP views (now your service will be consuming and populating only JSON text format)
     -	make your service RESTful (don't implement HATEOAS logic for now. It will be accomplished in the scope of future lectures)
