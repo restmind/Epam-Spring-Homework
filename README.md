@@ -27,3 +27,16 @@ Optional (would be a great plus):
     -	check whether there is a user in the database with such username during registration. If so, throw an error.
     -	make a class level validation annotation that will check whether 2 passwords (‘password’ and ‘repeatPassword’ fields) are the same during registration. If not, throw an error.
 3. Add multilingual support for exception messages configuring the ‘MessageSource’ bean - https://www.baeldung.com/spring-custom-validation-message-source
+
+
+
+# Poject Details
+## Car Rental
+
+The system has a list of cars for which it is necessary to implement:
+    - choice by brand;
+    - selection by quality class;
+    - sorting by rental price;
+    - sort by name.
+
+And have all the CRUD operations for the car. Add users who will own those cars
