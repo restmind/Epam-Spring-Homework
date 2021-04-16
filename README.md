@@ -34,9 +34,9 @@ Optional (would be a great plus):
 ## Car Rental
 
 The system has a list of cars for which it is necessary to implement:
-    -   choice by brand.
-    -   selection by quality class.
-    -   sorting by rental price.
-    -   sort by name.
+    *   choice by brand.
+    *   selection by quality class.
+    *   sorting by rental price.
+    *   sort by name.
 
 And have all the CRUD operations for the car. Add users who will own those cars
