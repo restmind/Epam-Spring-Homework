@@ -22,7 +22,7 @@ Optional (would be a great plus):
     -	https://www.baeldung.com/spring-security-basic-authentication
 
 
-# Poject Details
+# Project Details
 ## Car Rental
 
 The system has a list of cars for which it is necessary to implement:
