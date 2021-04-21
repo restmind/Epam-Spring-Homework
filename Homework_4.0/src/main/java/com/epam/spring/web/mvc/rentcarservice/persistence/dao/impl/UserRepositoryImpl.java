@@ -1,5 +1,6 @@
 package com.epam.spring.web.mvc.rentcarservice.persistence.dao.impl;
 
+import com.epam.spring.web.mvc.rentcarservice.exception.UserNotFoundException;
 import com.epam.spring.web.mvc.rentcarservice.persistence.model.User;
 import com.epam.spring.web.mvc.rentcarservice.persistence.dao.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,7 @@ public class UserRepositoryImpl implements UserRepository {
     public User getUser(String email) {
         log.info("Got User by email: " + email);
         return list.stream().filter(user -> user.getEmail().equals(email))
-                .findFirst().orElseThrow(RuntimeException::new);
+                .findFirst().orElseThrow(UserNotFoundException::new);
     }
 
     @Override
@@ -33,7 +34,7 @@ public class UserRepositoryImpl implements UserRepository {
         if (isDeleted) {
             list.add(user);
         } else {
-            throw new RuntimeException("User does not exists");
+            throw new UserNotFoundException();
         }
         log.info("User with email " + email + " was updated");
         return user;

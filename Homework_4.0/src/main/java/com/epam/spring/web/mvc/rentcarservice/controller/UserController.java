@@ -1,57 +1,54 @@
 package com.epam.spring.web.mvc.rentcarservice.controller;
 
+import com.epam.spring.web.mvc.rentcarservice.api.UserApi;
+import com.epam.spring.web.mvc.rentcarservice.controller.assembler.UserAssembler;
+import com.epam.spring.web.mvc.rentcarservice.controller.model.UserModel;
 import com.epam.spring.web.mvc.rentcarservice.dto.UserDto;
 import com.epam.spring.web.mvc.rentcarservice.service.UserService;
-import com.epam.spring.web.mvc.rentcarservice.validation.BasicInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/users")
 @RequiredArgsConstructor
-public class UserController {
+public class UserController implements UserApi {
     private final UserService userService;
+    private final UserAssembler userAssembler;
 
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/{email}")
-    public UserDto getUser(@PathVariable String email) {
+    @Override
+    public UserModel getUser(String email) {
         log.info("Getting user with email{}", email);
-        return userService.getUser(email);
+        UserDto user = userService.getUser(email);
+        return userAssembler.toModel(user);
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
-    public UserDto createUser(@Validated(BasicInfo.class)  @RequestBody UserDto userDto) {
+    @Override
+    public UserModel createUser(UserDto userDto) {
         log.info("creating user{}", userDto);
-        return userService.createUser(userDto);
+        UserDto user = userService.createUser(userDto);
+        return userAssembler.toModel(user);
     }
 
-    @ResponseStatus(HttpStatus.OK)
-    @PutMapping(value = "/{email}")
-    public UserDto updateUser(@PathVariable String email, @RequestBody UserDto userDto) {
+    @Override
+    public UserModel updateUser(String email, UserDto userDto) {
         log.info("Updating user with email{}", email);
-        return userService.updateUser(email, userDto);
+        UserDto user = userService.updateUser(email, userDto);
+        return userAssembler.toModel(user);
     }
 
-    @DeleteMapping(value = "/{email}")
-    public ResponseEntity<Void> deleteUser(@PathVariable String email) {
+    @Override
+    public ResponseEntity<Void> deleteUser(String email) {
         log.info("Deleting user with email{}", email);
         userService.deleteUser(email);
-        return  ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build();
     }
 
-    @ResponseStatus(HttpStatus.OK)
-    @PatchMapping(value = "{email}/rent-car")
-    public UserDto UserSetCar(@PathVariable String email, @RequestParam String carNumber) {
+    @Override
+    public UserModel userSetCar(String email, String carNumber) {
         log.info("Setting car for user with email{}", email);
-        return userService.userSetCar(carNumber, email);
-
+        UserDto user = userService.userSetCar(carNumber, email);
+        return userAssembler.toModel(user);
     }
 }

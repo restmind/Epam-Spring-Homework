@@ -1,5 +1,6 @@
 package com.epam.spring.web.mvc.rentcarservice.persistence.dao.impl;
 
+import com.epam.spring.web.mvc.rentcarservice.exception.CarNotFoundException;
 import com.epam.spring.web.mvc.rentcarservice.persistence.model.Car;
 import com.epam.spring.web.mvc.rentcarservice.persistence.dao.CarRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +25,7 @@ public class CarRepositoryImpl implements CarRepository {
     public Car getCar(String carNumber) {
         log.info("Got car by carNumber: " + carNumber);
         return list.stream().filter(car -> car.getCarNumber().equals(carNumber))
-                .findFirst().orElseThrow(RuntimeException::new);
+                .findFirst().orElseThrow(CarNotFoundException::new);
     }
 
     @Override
@@ -41,7 +42,7 @@ public class CarRepositoryImpl implements CarRepository {
             list.add(car);
             log.info("Update car with carNumber: " + carNumber);
         } else {
-            throw new RuntimeException("Car does not exists");
+            throw new CarNotFoundException();
         }
         return car;
     }

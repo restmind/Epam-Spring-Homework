@@ -103,6 +103,7 @@ public class CarServiceImpl implements CarService {
                 .brand(car.getBrand())
                 .model(car.getModel())
                 .carClass(car.getCarClass())
+                .carNumber(car.getCarNumber())
                 .price(car.getPrice())
                 .isAvailable(car.isAvailable())
                 .build();
